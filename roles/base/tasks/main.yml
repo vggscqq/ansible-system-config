@@ -1,3 +1,7 @@
+# Load distro-specific variables
+- include_vars: "{{ ansible_distribution }}.yml"
+  tags: always
+
 - block:
   # Make sure user exist on the system
   - import_tasks: users/vgscq.yml
