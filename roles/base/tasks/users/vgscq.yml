@@ -1,0 +1,53 @@
+- name: users | vgscq | create group
+  tags: groups,users
+  group:
+    name: vgscq
+    state: present
+
+- name: users | vgscq | create user
+  tags: users
+  user:
+    name: vgscq
+    group: vgscq
+    groups: users,wheel
+    state: present
+    shell: /bin/fish
+
+- name: users | vgscq | add sudoers file
+  tags: sudo
+  copy:
+    src: users/sudoer_vgscq
+    dest: /etc/sudoers.d/vgscq
+    owner: root
+    group: root
+    mode: 0440
+
+- name: users | vgscq | create config directories
+  tags: dotfiles
+  file:
+    path: /home/vgscq/{{ item.dir }}
+    state: directory
+    owner: vgscq
+    group: vgscq
+    mode: 0700
+  with_items:
+    - { dir: '.config' }
+    - { dir: '.config/htop' }
+    - { dir: '.config/mc' }
+    - { dir: '.config/neofetch' }
+    - { dir: '.config/nvim' }
+
+
+- name: users | vgscq | copy dotfiles
+  tags: dotfiles
+  copy:
+    src: users/vgscq/{{ item.src }}
+    dest: /home/vgscq/{{ item.dest }}
+    owner: vgscq
+    group: vgscq
+    mode: 0600
+  with_items:
+    - { src: 'htop/htoprc', dest: '.config/htop/htoprc' }
+    - { src: 'mc/ini', dest: '.config/mc/ini' }
+    - { src: 'neofetch/config.conf', dest: '.config/neofetch/config.conf' }
+    - { src: 'nvim/init.vim', dest: '.config/nvim/init.vim' }
