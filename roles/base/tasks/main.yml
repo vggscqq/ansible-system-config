@@ -1,18 +1,10 @@
 - block:
-  # Make sure users exist on the system
+  # Make sure user exist on the system
   - import_tasks: users/vgscq.yml
-#  - import_tasks: users/root.yml
-#  - import_tasks: users/simone.yml
 
-  # Set up the ansible environment
-#  - import_tasks: ansible_setup.yml
 
   # install software
-#  - import_tasks: software/repositories.yml
-#  - import_tasks: software/packages_development.yml
-#  - import_tasks: software/packages_cleanup.yml
-#  - import_tasks: software/packages_pip.yml
-#  - import_tasks: software/packages_utilities.yml
+  - import_tasks: software/basic.yml
 
   # Perform remaining tasks:
 #  - import_tasks: system_setup/clock.yml

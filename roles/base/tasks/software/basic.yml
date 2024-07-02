@@ -1,0 +1,21 @@
+- name: system setup | utilities | install utility packages
+  tags: packages,system,settings
+  package:
+    state: latest
+    name:
+      - fish
+      - curl
+      - htop
+      - "{{ lm_sensors_package }}"
+      - lsof
+      - mc
+      - ncdu
+      - neofetch
+      - net-tools
+      - nmap
+      - rsync
+      - sshfs
+      - tmux
+      - traceroute
+      - "{{ nvim_package }}"
+      - wget

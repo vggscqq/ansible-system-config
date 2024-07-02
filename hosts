@@ -1,2 +1,10 @@
 [workstation]
 archlinuxtesting
+vgscq-laptop
+
+[server]
+orange
+arch-docker
+red
+green
+anthracite
