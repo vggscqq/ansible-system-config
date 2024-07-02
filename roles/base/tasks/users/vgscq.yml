@@ -4,6 +4,11 @@
     name: vgscq
     state: present
 
+- name: find fish shell path
+  command: which fish
+  register: fish_path
+  changed_when: false
+
 - name: users | vgscq | create user
   tags: users
   user:
@@ -11,7 +16,7 @@
     group: vgscq
     groups: users,{{ sudo_group }}
     state: present
-    shell: /bin/fish
+    shell: "{{ fish_path.stdout }}"
 
 - name: users | vgscq | add sudoers file
   tags: sudo
