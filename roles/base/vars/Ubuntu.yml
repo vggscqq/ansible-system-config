@@ -17,4 +17,4 @@ rename_package: rename
 ruby_rake_package: rake
 sftp_path: /usr/lib/openssh/sftp-server
 sudo_group: sudo
-vim_package: vim-nox
+nvim_package: neovim

@@ -9,7 +9,7 @@
   user:
     name: vgscq
     group: vgscq
-    groups: users,wheel
+    groups: users,{{ sudo_group }}
     state: present
     shell: /bin/fish
 
