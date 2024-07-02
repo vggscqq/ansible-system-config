@@ -16,7 +16,7 @@
 - name: users | vgscq | add sudoers file
   tags: sudo
   copy:
-    src: users/sudoer_vgscq
+    src: users/vgscq/sudoer_vgscq
     dest: /etc/sudoers.d/vgscq
     owner: root
     group: root
