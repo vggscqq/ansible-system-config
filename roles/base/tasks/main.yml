@@ -15,5 +15,5 @@
 
     # Make sure yay installed
     - name: Install yay
-      ansible.builtin.import_tasks: users/yay.yml
+      ansible.builtin.import_tasks: software/yay.yml
       when: ansible_distribution == "Archlinux"
