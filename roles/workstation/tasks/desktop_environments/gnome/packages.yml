@@ -39,4 +39,4 @@
   ansible.builtin.service:
     name: gdm
     enabled: true
-#    state: started
+    state: started

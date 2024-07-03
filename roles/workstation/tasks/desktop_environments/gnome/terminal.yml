@@ -3,7 +3,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/Terminal/Legacy/Settings/menu-accelerator-enabled/"
+    key: "/org/gnome/Terminal/Legacy/Settings/menu-accelerator-enabled"
     value: "false"
 
 - name: Gnome | terminal | set terminal configuration
