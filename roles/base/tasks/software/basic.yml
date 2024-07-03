@@ -18,3 +18,4 @@
       - traceroute
       - "{{ nvim_package }}"
       - wget
+      - "{{ python_pip_package }}"

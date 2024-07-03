@@ -6,13 +6,13 @@
     key: "/org/gnome/Terminal/Legacy/Settings/menu-accelerator-enabled"
     value: "false"
 
-- name: gnome | terminal | set terminal configuration
+- name: Gnome | terminal | set terminal configuration
   tags: gnome,terminal
   become_user: vgscq
   become: true
-  dconf:
+  community.general.dconf:
     key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/{{ item.key }}"
-    value: "{{ item.value}}"
+    value: "{{ item.value }}"
   with_items:
     - { key: profilesbackground-transparency-percent, value: "10" }
     - { key: default-size-columns, value: "116" }
@@ -21,16 +21,14 @@
     - { key: use-system-font, value: "false"}
     - { key: use-transparent-background, value: "true"}
 
-- name: gnome | terminal | set terminal keybindings
+- name: Gnome | terminal | set terminal keybindings
   tags: gnome,terminal
   become_user: vgscq
   become: true
-  dconf:
+  community.general.dconf:
     key: "/org/gnome/terminal/legacy/keybindings/{{ item.key }}"
-    value: "{{ item.value}}"
+    value: "{{ item.value }}"
   with_items:
     - { key: new-tab, value: "'<Primary>t'" }
     - { key: next-tab, value: "'<Primary>Right'"}
     - { key: prev-tab, value: "'<Primary>Left'"}
-
-
