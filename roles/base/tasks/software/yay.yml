@@ -7,6 +7,14 @@
     update: true
   when: ansible_distribution == "Archlinux"
 
+- name: Change ownership of /tmp/yay to vgscq
+  ansible.builtin.file:
+    path: /tmp/yay
+    owner: vgscq
+    group: vgscq
+    state: directory
+  become: yes
+
 - name: Build and install yay
   ansible.builtin.command:
     chdir: "/tmp/yay"
