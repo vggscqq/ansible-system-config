@@ -14,7 +14,7 @@
 
     - name: Gnome | config | shell settings
       ansible.builtin.import_tasks: desktop_environments/gnome/shell_settings.yml
-    
+
     - name: Gnome | config | Terminal
       ansible.builtin.import_tasks: desktop_environments/gnome/terminal.yml
 
