@@ -3,7 +3,7 @@
   ansible.builtin.include_vars: "{{ ansible_distribution }}.yml"
   tags: always
 
-- name: Ensure necessary tasks are imported
+- name: Ensure necessary basic tasks are imported
   block:
     # Install software
     - name: Import software installation tasks

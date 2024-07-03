@@ -1,0 +1,42 @@
+- name: Gnome | packages | install gnome packages
+  tags: gnome,gnome-packages
+  ansible.builtin.package:
+    name:
+      - eog
+      - file-roller
+      - "{{ gdm_package }}"
+      - gedit
+      - gnome-backgrounds
+#      - gnome-books
+#      - gnome-boxes
+      - gnome-control-center
+      - gnome-disk-utility
+#      - gnome-documents
+      - gnome-icon-theme
+#      - gnome-music
+#      - gnome-photos
+      - gnome-power-manager
+      - gnome-remote-desktop
+      - gnome-shell
+      - gnome-shell-extensions
+#      - gnome-system-monitor
+      - gnome-terminal
+ #     - gnome-todo
+      - gnome-tweaks
+      - nautilus
+
+# It appears as though Debian and Ubuntu place GNOME support for openvpn in a separate package
+# This doesn't seem to be required in archlinux.
+- name: Gnome | packages | install gnome support for network-manager for debian and ubuntu hosts
+  tags: gnome,gnome-packages,packages
+  ansible.builtin.package:
+    name:
+      - network-manager-openvpn-gnome
+  when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+
+- name: Gnome | packages | enable and start gdm
+  tags: autofs,system,system setup
+  ansible.builtin.service:
+    name: gdm
+    enabled: true
+    state: started

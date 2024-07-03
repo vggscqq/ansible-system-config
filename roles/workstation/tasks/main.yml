@@ -1,0 +1,13 @@
+# Load distro-specific variables
+- name: Load distro-specific variables
+  ansible.builtin.include_vars: "{{ ansible_distribution }}.yml"
+  tags: always
+
+- name: Ensure necessary workstation tasks are imported
+  block:
+
+    - name: Install gnome
+      ansible.builtin.import_tasks: desktop_environments/gnome/packages.yml
+
+    - name: System tweaks
+      ansible.builtin.import_tasks: system_setup/tweaks.yml

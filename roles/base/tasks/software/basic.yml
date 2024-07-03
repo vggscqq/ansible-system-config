@@ -1,7 +1,6 @@
 - name: System setup | utilities | install utility packages
   tags: packages,system,settings
   ansible.builtin.package:
-    # state: latest
     name:
       - fish
       - curl
