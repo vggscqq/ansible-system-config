@@ -12,3 +12,8 @@
     # Make sure user exist on the system
     - name: Import user tasks
       ansible.builtin.import_tasks: users/vgscq.yml
+
+    # Make sure yay installed
+    - name: Install yay
+      ansible.builtin.import_tasks: users/yay.yml
+      when: ansible_distribution == "Archlinux"
