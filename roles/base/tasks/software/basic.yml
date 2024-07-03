@@ -19,3 +19,4 @@
       - "{{ nvim_package }}"
       - wget
       - "{{ python_pip_package }}"
+      - "{{ python_passlib_package }}"

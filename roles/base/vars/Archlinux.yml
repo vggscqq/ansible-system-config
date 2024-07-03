@@ -18,3 +18,4 @@ ruby_rake_package: ruby-rake
 sftp_path: /usr/lib/ssh/sftp-server
 sudo_group: wheel
 nvim_package: neovim
+python_passlib_package: python-passlib
