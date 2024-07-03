@@ -3,7 +3,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/desktop/peripherals/mouse/accel-profile/"
+    key: "/org/gnome/desktop/peripherals/mouse/accel-profile"
     value: "flat"
 
 - name: Gnome | peripherals | Numlock state
