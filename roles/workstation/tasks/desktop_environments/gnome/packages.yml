@@ -12,7 +12,7 @@
       - gnome-control-center
       - gnome-disk-utility
 #      - gnome-documents
-      - gnome-icon-theme
+#      - gnome-icon-theme
 #      - gnome-music
 #      - gnome-photos
       - gnome-power-manager
