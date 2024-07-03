@@ -1,4 +1,10 @@
 # install yay on archlinux
+- name: Ensure /tmp/yay is absent
+  ansible.builtin.file:
+    path: /tmp/yay
+    state: absent
+  become: yes
+
 - name: Clone yay
   tags: skip_ansible_lint
   ansible.builtin.git:
@@ -24,3 +30,9 @@
   when: ansible_distribution == "Archlinux"
   become: true
   become_user: vgscq
+
+- name: Ensure /tmp/yay is absent
+  ansible.builtin.file:
+    path: /tmp/yay
+    state: absent
+  become: yes
