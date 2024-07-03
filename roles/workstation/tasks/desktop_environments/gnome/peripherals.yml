@@ -3,7 +3,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/desktop/peripherals/mouse/accel-profile"
+    key: "/org/gnome/desktop/peripherals/mouse/accel-profile/"
     value: "flat"
 
 - name: Gnome | peripherals | Numlock state
@@ -11,7 +11,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/desktop/peripherals/keyboard/numlock-state"
+    key: "/org/gnome/desktop/peripherals/keyboard/numlock-state/"
     value: "true"
 
 - name: Gnome | peripherals | Input languages
@@ -19,7 +19,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/desktop/input-sources/mru-sources"
+    key: "/org/gnome/desktop/input-sources/mru-sources/"
     value: "[('xkb', 'us'), ('xkb', 'cz+qwerty'), ('xkb', 'ru')]"
 
 - name: Gnome | peripherals | Input languages 2
@@ -27,7 +27,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/desktop/input-sources/sources"
+    key: "/org/gnome/desktop/input-sources/sources/"
     value: "[('xkb', 'us'), ('xkb', 'ru'), ('xkb', 'cz+qwerty')]"
 
 - name: Gnome | peripherals | Input languages per window (disable)
@@ -35,7 +35,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/desktop/input-sources/per-window"
+    key: "/org/gnome/desktop/input-sources/per-window/"
     value: false
 
 - name: Gnome | peripherals | Change keyboard layout by caps lock
@@ -43,7 +43,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/desktop/input-sources/xkb-options"
+    key: "/org/gnome/desktop/input-sources/xkb-options/"
     value: "['grp:caps_toggle']"
 
 - name: Gnome | peripherals | Enable night-light
@@ -51,7 +51,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled"
+    key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled/"
     value: true
 
 - name: Gnome | power | Enable idle dim
@@ -59,7 +59,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/settings-daemon/plugins/power/idle-dim"
+    key: "/org/gnome/settings-daemon/plugins/power/idle-dim/"
     value: true
 
 - name: Gnome | power | Disable inactive action (ac)
@@ -67,7 +67,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-type"
+    key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-type/"
     value: true
 
 - name: Gnome | power | Disable inactive action (battery)
@@ -75,5 +75,5 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-type"
+    key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-type/"
     value: true

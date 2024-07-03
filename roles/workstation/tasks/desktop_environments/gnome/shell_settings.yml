@@ -3,7 +3,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/desktop/wm/preferences/button-layout"
+    key: "/org/gnome/desktop/wm/preferences/button-layout/"
     value: "'appmenu:minimize,close'"
 
 # - name: Gnome | shell settings | event-sounds (disable)
@@ -20,7 +20,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/desktop/session/idle-delay"
+    key: "/org/gnome/desktop/session/idle-delay/"
     value: "uint32 0"
 
 - name: Gnome | shell settings | Allow volume above 100 percent
@@ -28,7 +28,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/desktop/sound/allow-volume-above-100-percent"
+    key: "/org/gnome/desktop/sound/allow-volume-above-100-percent/"
     value: "true"
 
 - name: Gnome | shell settings | old-files-age
@@ -36,7 +36,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/desktop/privacy/old-files-age"
+    key: "/org/gnome/desktop/privacy/old-files-age/"
     value: "uint32 14"
 
 - name: Gnome | shell settings | remove-old-temp-files
@@ -44,7 +44,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/desktop/privacy/remove-old-temp-files"
+    key: "/org/gnome/desktop/privacy/remove-old-temp-files/"
     value: "true"
 
 - name: Gnome | shell settings | remove-old-trash-files
@@ -52,7 +52,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/desktop/privacy/remove-old-trash-files"
+    key: "/org/gnome/desktop/privacy/remove-old-trash-files/"
     value: "true"
 
 - name: Gnome | shell settings | search-providers
@@ -60,7 +60,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/desktop/search-providers/disabled"
+    key: "/org/gnome/desktop/search-providers/disabled/"
     value: "['org.gnome.Nautilus.desktop', \
       'org.gnome.Calculator.desktop', \
       'org.gnome.seahorse.Application.desktop', \
@@ -75,7 +75,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/desktop/interface/show-battery-percentage"
+    key: "/org/gnome/desktop/interface/show-battery-percentage/"
     value: "true"
 
 - name: Gnome | shell settings | workspaces-only-on-primary
@@ -83,7 +83,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "org/gnome/mutter/workspaces-only-on-primary"
+    key: "org/gnome/mutter/workspaces-only-on-primary/"
     value: "true"
 
 - name: Gnome | shell settings | set gnome-screenshot default save directory
@@ -91,7 +91,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/gnome-screenshot/auto-save-directory"
+    key: "/org/gnome/gnome-screenshot/auto-save-directory/"
     value: "'/tmp'"
 
 - name: Gnome | nautilus | set directories to be shown first
@@ -99,5 +99,5 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gtk/settings/file-chooser/sort-directories-first"
+    key: "/org/gtk/settings/file-chooser/sort-directories-first/"
     value: "true"
