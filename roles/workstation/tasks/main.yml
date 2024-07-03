@@ -9,5 +9,14 @@
     - name: Install gnome
       ansible.builtin.import_tasks: desktop_environments/gnome/packages.yml
 
+    - name: Gnome | config | peripherals
+      ansible.builtin.import_tasks: desktop_environments/gnome/peripherals.yml
+
+    - name: Gnome | config | shell settings
+      ansible.builtin.import_tasks: desktop_environments/gnome/shell_settings.yml
+    
+    - name: Gnome | config | Terminal
+      ansible.builtin.import_tasks: desktop_environments/gnome/terminal.yml
+
     - name: System tweaks
       ansible.builtin.import_tasks: system_setup/tweaks.yml

@@ -1,0 +1,79 @@
+- name: Gnome | peripherals | Mouse acceleration profile
+  tags: gnome,mouse,peripherals
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/desktop/peripherals/mouse/accel-profile"
+    value: "flat"
+
+- name: Gnome | peripherals | Numlock state
+  tags: gnome,keyboard,peripherals
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/desktop/peripherals/keyboard/numlock-state"
+    value: "true"
+
+- name: Gnome | peripherals | Input languages
+  tags: gnome,keyboard,peripherals
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/desktop/input-sources/mru-sources"
+    value: "[('xkb', 'us'), ('xkb', 'cz+qwerty'), ('xkb', 'ru')]"
+
+- name: Gnome | peripherals | Input languages 2
+  tags: gnome,keyboard,peripherals
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/desktop/input-sources/sources"
+    value: "[('xkb', 'us'), ('xkb', 'ru'), ('xkb', 'cz+qwerty')]"
+
+- name: Gnome | peripherals | Input languages per window (disable)
+  tags: gnome,keyboard,peripherals
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/desktop/input-sources/per-window"
+    value: false
+
+- name: Gnome | peripherals | Change keyboard layout by caps lock
+  tags: gnome,keyboard,peripherals
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/desktop/input-sources/xkb-options"
+    value: "['grp:caps_toggle']"
+
+- name: Gnome | peripherals | Enable night-light
+  tags: gnome,display,peripherals
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled"
+    value: true
+
+- name: Gnome | power | Enable idle dim
+  tags: gnome,display,peripherals
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/settings-daemon/plugins/power/idle-dim"
+    value: true
+
+- name: Gnome | power | Disable inactive action (ac)
+  tags: gnome,power,peripherals
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-type"
+    value: true
+
+- name: Gnome | power | Disable inactive action (battery)
+  tags: gnome,power,peripherals
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-type"
+    value: true

@@ -32,7 +32,7 @@
   ansible.builtin.package:
     name:
       - network-manager-openvpn-gnome
-  when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+  when: ansible_distribution in ["Ubuntu"]
 
 - name: Gnome | packages | enable and start gdm
   tags: autofs,system,system setup
