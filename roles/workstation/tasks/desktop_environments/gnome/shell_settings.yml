@@ -83,7 +83,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "org/gnome/mutter/workspaces-only-on-primary"
+    key: "/org/gnome/mutter/workspaces-only-on-primary"
     value: "true"
 
 - name: Gnome | shell settings | set gnome-screenshot default save directory
