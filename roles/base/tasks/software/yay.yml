@@ -12,8 +12,9 @@
     path: /tmp/yay
     owner: vgscq
     group: vgscq
+    mode: '0755'
     state: directory
-  become: yes
+  become: true
 
 - name: Build and install yay
   ansible.builtin.command:
@@ -21,6 +22,5 @@
     cmd: "makepkg -sfi --noconfirm"
     creates: /usr/bin/yay
   when: ansible_distribution == "Archlinux"
-  become: yes
+  become: true
   become_user: vgscq
-
