@@ -4,7 +4,7 @@
   become: true
   community.general.dconf:
     key: "/org/gnome/desktop/peripherals/mouse/accel-profile"
-    value: "flat"
+    value: "'flat'"
 
 - name: Gnome | peripherals | Numlock state
   tags: gnome,keyboard,peripherals
