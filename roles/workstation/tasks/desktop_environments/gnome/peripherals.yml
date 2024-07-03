@@ -1,11 +1,11 @@
-# - name: Gnome | peripherals | Mouse acceleration profile
-#   tags: gnome,mouse,peripherals
-#   become_user: vgscq
-#   become: true
-#   community.general.dconf:
-#     key: "/org/gnome/desktop/peripherals/mouse/accel-profile"
-#     value: "flat"
-#     state: present
+- name: Gnome | peripherals | Mouse acceleration profile
+  tags: gnome,mouse,peripherals
+  become_user: vgscq
+  # become: true
+  community.general.dconf:
+    key: "/org/gnome/desktop/peripherals/mouse/accel-profile"
+    value: "flat"
+    state: present
 
 - name: Gnome | peripherals | Numlock state
   tags: gnome,keyboard,peripherals
