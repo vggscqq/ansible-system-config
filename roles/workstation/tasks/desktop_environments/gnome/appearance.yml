@@ -1,3 +1,11 @@
+- name: Gnome | appearance | set dark theme
+  tags: gnome,gnome-wallpaper
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/desktop/interface/color-scheme"
+    value: "'prefer-dark'"
+
 - name: Gnome | appearance | Create wallpaper directory
   ansible.builtin.file:
     path: "/usr/share/backgrounds/vgscq/"
@@ -8,7 +16,7 @@
 - name: Gnome | appearance | copy wallpaper file
   tags: gnome,gnome-wallpaper
   ansible.builtin.copy:
-    src: gnome/2.jpg
+    src: gnome/3.jpg
     dest: /usr/share/backgrounds/vgscq/vgscq-wallpaper.png
     owner: root
     group: root
@@ -28,7 +36,7 @@
   become: true
   community.general.dconf:
     key: "/org/gnome/desktop/background/picture-options"
-    value: "'zoom'"
+    value: "'stretched'"
 
 - name: Gnome | appearance | Ensure unzip is installed
   ansible.builtin.package:
@@ -53,11 +61,3 @@
   ansible.builtin.command: fc-cache -f -v
   changed_when: true
   become: true
-
-- name: Gnome | appearance | set dark theme
-  tags: gnome,gnome-wallpaper
-  become_user: vgscq
-  become: true
-  community.general.dconf:
-    key: "/org/gnome/desktop/interface/color-scheme"
-    value: "'prefer-dark'"
