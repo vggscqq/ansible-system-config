@@ -9,11 +9,13 @@
   register: fish_path
   changed_when: false
 
-- name: Check if user vgscq exists
+- name: Check if user vgscq exists (without failing)
   ansible.builtin.getent:
     database: passwd
     key: "vgscq"
+    ignore_errors: yes
   register: user_exists
+
 
 - name: Create user (if not exists) with password
   ansible.builtin.user:
