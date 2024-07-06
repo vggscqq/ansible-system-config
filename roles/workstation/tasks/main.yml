@@ -18,5 +18,8 @@
     - name: Gnome | config | Terminal
       ansible.builtin.import_tasks: desktop_environments/gnome/terminal.yml
 
+    - name: Gnome | config | Appearance
+      ansible.builtin.import_tasks: desktop_environments/gnome/appearance.yml
+
     - name: System tweaks
       ansible.builtin.import_tasks: system_setup/tweaks.yml
