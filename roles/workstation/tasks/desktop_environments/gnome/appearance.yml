@@ -1,3 +1,10 @@
+- name: Gnome | appearance | Create wallpaper directory
+  ansible.builtin.file:
+    path: "/usr/share/backgrounds/vgscq/"
+    state: directory
+    mode: '0755'
+  become: true
+
 - name: Gnome | appearance | copy wallpaper file
   tags: gnome,gnome-wallpaper
   ansible.builtin.copy:
