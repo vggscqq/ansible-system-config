@@ -9,17 +9,33 @@
   register: fish_path
   changed_when: false
 
-- name: Users | vgscq | create user
-  tags: users
+- name: Check if user vgscq exists
+  ansible.builtin.getent:
+    database: passwd
+    key: "vgscq"
+  register: user_exists
+
+- name: Create user (if not exists) with password
   ansible.builtin.user:
-    name: vgscq
-    group: vgscq
-    groups: users,{{ sudo_group }}
-    state: present
-    password: "{{ '1111' | password_hash('sha512') }}"
-    shell: "{{ fish_path.stdout }}"
+    name: "vgscq"
+    password: "111"
+  when: not user_exists.matched
+
+- name: Expire password for existing user (if exists)
   ansible.builtin.command: passwd -e vgscq
-  when: not user_vgscq.exists
+  when: not user_exists.matched
+  changed_when: true
+
+
+# - name: Users | vgscq | create user
+#   tags: users
+#   ansible.builtin.user:
+#     name: vgscq
+#     group: vgscq
+#     groups: users,{{ sudo_group }}
+#     state: present
+#     password: "{{ '1111' | password_hash('sha512') }}"
+#     shell: "{{ fish_path.stdout }}"
 
 # - name: Users | vgscq | expire password
 #   ansible.builtin.command: passwd -e vgscq
