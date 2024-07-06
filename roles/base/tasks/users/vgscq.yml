@@ -18,9 +18,11 @@
     state: present
     password: "{{ '1111' | password_hash('sha512') }}"
     shell: "{{ fish_path.stdout }}"
-
-- name: Users | vgscq | expire password
   ansible.builtin.command: passwd -e vgscq
+  when: not user_vgscq.exists 
+
+#- name: Users | vgscq | expire password
+#  ansible.builtin.command: passwd -e vgscq
 
 - name: Users | vgscq | add sudoers file
   tags: sudo
