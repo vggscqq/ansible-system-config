@@ -1,3 +1,16 @@
+- name: Remove gnome-terminal
+  ansible.builtin.pacman:
+    name: gnome-terminal
+    state: absent
+  when: ansible_distribution == "Archlinux"
+
+- name: Install gnome-terminal-transparency using yay
+  ansible.builtin.command:
+    cmd: yay -S --noconfirm gnome-terminal-transparency
+  args:
+    creates: /usr/bin/gnome-terminal-transparency
+  when: ansible_distribution == "Archlinux"
+
 - name: Gnome | terminal | make F10 work
   tags: gnome,gnome-shell,terminal
   become_user: vgscq
