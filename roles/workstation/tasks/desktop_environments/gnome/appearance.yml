@@ -45,9 +45,8 @@
 
 - name: Gnome | appearance | Unzip sf-mono-fonts.zip
   ansible.builtin.unarchive:
-    src: gnome/SF-Mono-Font-master.zip
+    src: gnome/sfmono.zip
     dest: "/usr/share/fonts/sf-mono"
-    remote_src: true
   become: true
 
 - name: Gnome | appearance | Refresh font cache
