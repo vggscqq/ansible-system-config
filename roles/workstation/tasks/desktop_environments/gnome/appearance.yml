@@ -1,0 +1,49 @@
+- name: Gnome | appearance | copy wallpaper file
+  tags: gnome,gnome-wallpaper
+  ansible.builtin.copy:
+    src: gnome/1.jpg
+    dest: /usr/share/backgrounds/vgscq/vgscq-wallpaper.png
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Gnome | appearance | set wallpaper
+  tags: gnome,gnome-wallpaper
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/desktop/background/picture-uri"
+    value: "'file:///usr/share/backgrounds/vgscq/vgscq-wallpaper.png'"
+
+- name: Gnome | appearance | set wallpaper position
+  tags: gnome,gnome-wallpaper
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/desktop/background/picture-options"
+    value: "'zoom'"
+
+- name: Gnome | appearance | Ensure unzip is installed
+  ansible.builtin.package:
+    name: unzip
+    state: present
+  become: true
+
+- name: Gnome | appearance | Create fonts directory
+  ansible.builtin.file:
+    path: "/usr/share/fonts/sf-mono"
+    state: directory
+    mode: '0755'
+  become: true
+
+- name: Gnome | appearance | Unzip sf-mono-fonts.zip
+  ansible.builtin.unarchive:
+    src: gnome/SF-Mono-Font-master.zip
+    dest: "/usr/share/fonts/sf-mono"
+    remote_src: true
+  become: true
+
+- name: Gnome | appearance | Refresh font cache
+  ansible.builtin.command: fc-cache -f -v
+  changed_when: false
+  become: true
