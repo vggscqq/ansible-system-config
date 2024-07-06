@@ -8,7 +8,7 @@
 - name: Gnome | appearance | copy wallpaper file
   tags: gnome,gnome-wallpaper
   ansible.builtin.copy:
-    src: gnome/1.jpg
+    src: gnome/2.jpg
     dest: /usr/share/backgrounds/vgscq/vgscq-wallpaper.png
     owner: root
     group: root
@@ -53,3 +53,11 @@
   ansible.builtin.command: fc-cache -f -v
   changed_when: true
   become: true
+
+- name: Gnome | appearance | set dark theme
+  tags: gnome,gnome-wallpaper
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/desktop/interface/color-scheme"
+    value: "'prefer-dark'"
