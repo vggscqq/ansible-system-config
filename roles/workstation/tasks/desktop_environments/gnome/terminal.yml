@@ -30,7 +30,7 @@
     - { key: profilesbackground-transparency-percent, value: "10" }
     - { key: default-size-columns, value: "116" }
     - { key: default-size-rows, value: "30" }
-    - { key: font, value: "'SF Mono'" }
+    - { key: font, value: "'SF Mono 10'" }
     - { key: use-system-font, value: "false"}
     - { key: use-transparent-background, value: "true"}
 
