@@ -27,7 +27,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/desktop/background/picture-uri"
+    key: "/org/gnome/desktop/background/picture-uri-dark"
     value: "'file:///usr/share/backgrounds/vgscq/vgscq-wallpaper.png'"
 
 - name: Gnome | appearance | set wallpaper position
