@@ -89,4 +89,4 @@
     - { key: center-active, value: "false" }
     - { key: left-active, value: "false" }
     - { key: right-active, value: "true" }
-    - { key: right-commands-json, value: '{"commands":[{"isActive":true,"command":"/home/vgscq/.config/bin/powermon.sh","interval":5,"uuid":"d64681a8-4e6b-4f3f-85f3-d0c56580ba14"}]}' }
+    - { key: right-commands-json, value: "{\"commands\":[{\"isActive\":true,\"command\":\"/home/vgscq/.config/bin/powermon.sh\",\"interval\":5,\"uuid\":\"d64681a8-4e6b-4f3f-85f3-d0c56580ba14\"}]}" }
