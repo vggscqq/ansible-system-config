@@ -29,3 +29,5 @@ vagrant_version: 2.2.14
 virtualbox_package: virtualbox
 wireless_tools_package: wireless-tools
 wpa_supplicant_package: wpasupplicant
+telegram_package: telegram-desktop
+spotify_package: ""

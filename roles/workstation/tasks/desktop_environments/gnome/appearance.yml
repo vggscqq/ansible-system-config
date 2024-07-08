@@ -61,3 +61,20 @@
   ansible.builtin.command: fc-cache -f -v
   changed_when: true
   become: true
+
+- name: Gnome | appearance | Pinned apps bar
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/shell/favorite-apps"
+    value: "['org.mozilla.firefox.desktop', \
+      'org.telegram.desktop.desktop', \
+      'com.spotify.Client.desktop', \
+      'org.gnome.Terminal.desktop', \
+      'org.gnome.Nautilus.desktop', \
+      'winbox.desktop', \
+      'code.desktop', \
+      'virtualbox.desktop', \
+      'org.gnome.TextEditor.desktop', \
+      'org.remmina.Remmina.desktop', \
+      'io.github.brunofin.Cohesion.desktop']"

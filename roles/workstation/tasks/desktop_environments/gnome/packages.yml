@@ -34,13 +34,6 @@
       - network-manager-openvpn-gnome
   when: ansible_distribution in ["Ubuntu"]
 
-- name: Gnome | packages | enable and start gdm
-  tags: autofs,system,system setup
-  ansible.builtin.service:
-    name: gdm
-    enabled: true
-    state: started
-
 - name: Remove gnome-terminal
   ansible.builtin.pacman:
     name: gnome-terminal
@@ -53,3 +46,11 @@
   args:
     creates: /usr/bin/gnome-terminal-transparency
   when: ansible_distribution == "Archlinux"
+
+- name: Gnome | packages | enable and start gdm
+  tags: autofs,system,system setup
+  ansible.builtin.service:
+    name: gdm
+    enabled: true
+    state: started
+
