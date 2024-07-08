@@ -10,16 +10,16 @@
       - "{{ gstreamer_libav_package }}"
       - "{{ gstreamer_plugins_bad_package }}"
 
-- name: Gnome | YAY | Install cohesion
+- name: Gnome | YAY | Install cohesion [1/2]
   become_user: vgscq
   become: true
   ansible.builtin.command:
     cmd: yay -S --noconfirm nvm
   args:
-    creates: /usr/bin/cohesion
+    creates: /usr/share/nvm/nvm.sh
   when: ansible_distribution == "Archlinux"
 
-- name: Gnome | YAY | Install cohesion
+- name: Gnome | YAY | Install cohesion [2/2]
   become_user: vgscq
   become: true
   ansible.builtin.command:
