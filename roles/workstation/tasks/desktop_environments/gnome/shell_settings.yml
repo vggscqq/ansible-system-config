@@ -111,8 +111,8 @@
 
 - name: Copy TODOs
   ansible.builtin.copy:
-    src: TODO/
-    dest: ~/
+    src: TODO
+    dest: /home/vgscq/
     owner: vgscq
     group: vgscq
     mode: '0644'
