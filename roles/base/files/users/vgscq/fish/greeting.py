@@ -2,6 +2,7 @@ import subprocess
 import os
 import json
 import re
+import sys
 
 # Color codes
 w = "\033[0;37m"
@@ -19,8 +20,11 @@ def get_cpu_info():
 
 # Function to get CPU temperature
 def get_cpu_temperature():
-    result = subprocess.check_output(["awk", '{printf "%.0f", $1/1000}', "/sys/class/thermal/thermal_zone0/temp"])
-    return result.decode().strip()
+    try:
+        result = subprocess.check_output(["awk", '{printf "%.0f", $1/1000}', "/sys/class/thermal/thermal_zone0/temp"])
+        return result.decode().strip()
+    except Exception:
+        return "N\A"
 
 # Function to calculate uptime
 def get_uptime():
@@ -41,28 +45,12 @@ def get_system_info():
     la = ' '.join(os.popen('cat /proc/loadavg').read().split()[:3])
     return kernel, hostname, users, la
 
-
-
 # Function to calculate RAM usage
 def get_swap_usage():
-    zram_info = subprocess.check_output(["swapon", "-s"]).decode().split('\n')[1:]
-    #if zram_info:
-    #    size_zram = int(zram_info[0].split()[3])
-    #    used_zram = int(zram_info[0].split()[2])
-    #else:
-    #    size_zram = used_zram = 0
-
-    #size_zram_mb = round(size_zram / 1024, 2)
-    #used_zram_mb = round(used_zram / 1024, 2)
-
-    #total_size_gb = round((size_zram_mb) / 1024, 2)
-    #total_used_gb = round((used_zram_mb) / 1024, 2)
-
-    #usage = round((total_used_gb * 100) / total_size_gb)
-
+    swap_info = subprocess.check_output(["swapon", "-s"]).decode().split('\n')[1:]
     total_size_mb = 0
     total_used_mb = 0
-    for i in zram_info:
+    for i in swap_info:
         swap = i.split()
         if len(swap) == 5:
             total_size_mb += int(swap[2])
@@ -72,7 +60,6 @@ def get_swap_usage():
     total_used_gb = round((total_used_mb) / 1048576, 2)
 
     usage = round((total_used_gb * 100) / total_size_gb)
-
 
     return total_used_gb, total_size_gb, usage
 
@@ -190,7 +177,8 @@ def print_internet_info():
 def main():
     # Gather system information
     cpu = get_cpu_info()
-    cputemp = get_cpu_temperature()
+    if "workstation" in sys.argv:
+        cputemp = get_cpu_temperature()
     updays, uphours, upmins, upsec = get_uptime()
     kernel, hostname, users, uptime = get_system_info()
 
@@ -206,12 +194,16 @@ def main():
     ip_addresses = get_ip_addresses()
 
     # Gather Tailscale information
-    tailscale_peers = get_tailscale_info()
+    if "workstation" in sys.argv:
+        tailscale_peers = get_tailscale_info()
 
     # Print system information
     #print(f"\n{w}*{b} Welcome Back {m}{os.getlogin()}")
     print(f"{w}*{b} Hostname: {m}{hostname}")
-    print(f"{w}*{b} CPU: {m}{cpu}{b} CPU Temp: {m}{cputemp}°C")
+    if "workstation" in sys.argv:
+        print(f"{w}*{b} CPU: {m}{cpu}{b} CPU Temp: {m}{cputemp}°C")
+    else:
+        print(f"{w}*{b} CPU: {m}{cpu}{b}")
     print(f"{w}*{b} Uptime: {m}{updays} days {uphours} hours {upmins} minutes {upsec} seconds")
     print(f"{w}*{b} Load Avg. {m}{uptime}")
     print(f"{w}*{b} Memory: {m}{ram_bar}")
@@ -222,8 +214,9 @@ def main():
     # Print IP addresses
     print_ip_addresses(ip_addresses)
 
-    # Print Tailscale information
-    print_tailscale_info(tailscale_peers)
+    # Print Tailscale information\
+    if "workstation" in sys.argv:
+        print_tailscale_info(tailscale_peers)
 
     # Print internet information
     print_internet_info()
