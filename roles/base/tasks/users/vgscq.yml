@@ -54,6 +54,7 @@
     - { dir: '.config/mc' }
     - { dir: '.config/neofetch' }
     - { dir: '.config/nvim' }
+    - { dir: '.config/fish' }
 
 
 - name: Users | vgscq | copy dotfiles
@@ -69,3 +70,4 @@
     - { src: 'mc/ini', dest: '.config/mc/ini' }
     - { src: 'neofetch/config.conf', dest: '.config/neofetch/config.conf' }
     - { src: 'nvim/init.vim', dest: '.config/nvim/init.vim' }
+    - { src: 'fish/', dest: '.config/fish/' }

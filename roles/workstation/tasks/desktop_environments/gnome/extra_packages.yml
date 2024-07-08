@@ -18,7 +18,7 @@
 #   args:
 #     creates: /usr/share/nvm/nvm.sh
 #   when: ansible_distribution == "Archlinux"
-# 
+
 # - name: Gnome | YAY | Install cohesion [2/2]
 #   become_user: vgscq
 #   become: true
