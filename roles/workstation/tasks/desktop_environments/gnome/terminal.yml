@@ -14,7 +14,7 @@
     key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/{{ item.key }}"
     value: "{{ item.value }}"
   with_items:
-    - { key: profilesbackground-transparency-percent, value: "10" }
+    - { key: background-transparency-percent, value: "10" }
     - { key: default-size-columns, value: "116" }
     - { key: default-size-rows, value: "30" }
     - { key: font, value: "'SF Mono 12'" }
