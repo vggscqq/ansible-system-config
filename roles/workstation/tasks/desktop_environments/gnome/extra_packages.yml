@@ -9,6 +9,8 @@
       - "{{ virtualbox_package }}"
       - "{{ gstreamer_libav_package }}"
       - "{{ gstreamer_plugins_bad_package }}"
+      - qbittorrent
+      - vlc
 
 # - name: Gnome | YAY | Install cohesion [1/2]
 #   become_user: vgscq
@@ -27,3 +29,11 @@
 #   args:
 #     creates: /usr/bin/cohesion
 #   when: ansible_distribution == "Archlinux"
+
+- name: qbittorrent config copy
+  ansible.builtin.copy:
+    src: config/qBittorrent
+    dest: /home/vgscq/.config/
+    owner: vgscq
+    group: vgscq
+    mode: '0644'

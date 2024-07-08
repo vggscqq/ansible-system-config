@@ -67,7 +67,7 @@
   become: true
   community.general.dconf:
     key: "/org/gnome/shell/favorite-apps"
-    value: "['org.mozilla.firefox.desktop', \
+    value: "['firefox.desktop', \
       'org.telegram.desktop.desktop', \
       'com.spotify.Client.desktop', \
       'org.gnome.Terminal.desktop', \
