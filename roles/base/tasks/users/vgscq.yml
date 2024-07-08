@@ -55,6 +55,7 @@
     - { dir: '.config/neofetch' }
     - { dir: '.config/nvim' }
     - { dir: '.config/fish' }
+    - { dir: '.config/bin'}
 
 
 - name: Users | vgscq | copy dotfiles

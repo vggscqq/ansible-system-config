@@ -136,27 +136,33 @@ def print_ip_addresses(ip_addresses):
 
 # Function to get Tailscale information
 def get_tailscale_info():
-    result = subprocess.check_output(["tailscale", "status", "-json"])
-    data = json.loads(result.decode())
-    return data
+    try:
+        result = subprocess.check_output(["tailscale", "status", "-json"])
+        data = json.loads(result.decode())
+        return data
+    except Exception:
+        return 1
 
 # Function to print Tailscale information
 def print_tailscale_info(peers):
-    print(f"\n{w}*{b} Tailscale:")
-    print(f"\t\t\tIP\t\t\tDNS{w}")
-    
-    sf = peers.get("Self", {})
-    print("\t\t\t{}\t\t{}\n".format(sf.get("TailscaleIPs")[0], sf.get("DNSName")[:-1]))
+    if peers == 1:
+        print(f"\n{w}*{b} Tailscale: {r}OFF{b}")
+    else:
+        print(f"\n{w}*{b} Tailscale:")
+        print(f"\t\t\tIP\t\t\tDNS{w}")
+        
+        sf = peers.get("Self", {})
+        print("\t\t\t{}\t\t{}\n".format(sf.get("TailscaleIPs")[0], sf.get("DNSName")[:-1]))
 
-    for peer_id, peer_info in peers.get('Peer', {}).items():
-        tailscale_ips = peer_info.get('TailscaleIPs', [])
-        online_status = peer_info.get('Online', False)
-        dns_name = peer_info.get('DNSName', '')
+        for peer_id, peer_info in peers.get('Peer', {}).items():
+            tailscale_ips = peer_info.get('TailscaleIPs', [])
+            online_status = peer_info.get('Online', False)
+            dns_name = peer_info.get('DNSName', '')
 
-        if tailscale_ips and online_status:
-            tailscale_ip = tailscale_ips[0]
-            #print(f"\t\t\t{tailscale_ip}\t\t{online_status}\t{dns_name}")
-            print(f"\t\t\t{tailscale_ip}\t\t{dns_name[:-1]}")
+            if tailscale_ips and online_status:
+                tailscale_ip = tailscale_ips[0]
+                #print(f"\t\t\t{tailscale_ip}\t\t{online_status}\t{dns_name}")
+                print(f"\t\t\t{tailscale_ip}\t\t{dns_name[:-1]}")
 
 
 

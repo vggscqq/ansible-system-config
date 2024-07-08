@@ -2,7 +2,7 @@
 SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_ONLINE}=="0", RUN+="/usr/bin/powerprofilesctl set power-saver"
 
 #work dock
-ACTION=="add", SUBSYSTEM=="usb", ENV{ID_VENDOR_ID}=="0b95", ENV{ID_MODEL_ID}=="1790", RUN+="/home/vgscq/.config/bin/udev/work.sh"
+ACTION=="add", SUBSYSTEM=="usb", ENV{ID_VENDOR_ID}=="0b95", ENV{ID_MODEL_ID}=="1790", RUN+="/home/vgscq/.config/bin/udev/dock.sh work"
 #home dock
-ACTION=="add", SUBSYSTEM=="usb", ENV{ID_VENDOR_ID}=="0bda", ENV{ID_MODEL_ID}=="5487", RUN+="/home/vgscq/.config/bin/udev/home.sh"
+ACTION=="add", SUBSYSTEM=="usb", ENV{ID_VENDOR_ID}=="0bda", ENV{ID_MODEL_ID}=="5487", RUN+="/home/vgscq/.config/bin/udev/dock.sh"
 

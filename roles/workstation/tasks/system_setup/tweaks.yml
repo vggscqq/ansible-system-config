@@ -26,3 +26,15 @@
   with_items:
     - { src: '99-dockstations.rules', dest: '99-dockstations.rules' }
     - { src: '99-low-battery.rules', dest: '99-low-battery.rules' }
+
+- name: Copy udev handlers
+  become: true
+  ansible.builtin.copy:
+    src: udev/{{ item.src }}
+    dest: /home/vgscq/.config/bin/{{ item.dest }}
+    owner: vgscq
+    group: vgscq
+    mode: '0755'
+  with_items:
+    - { src: 'battery.sh', dest: 'battery.sh' }
+    - { src: 'battery_off.sh', dest: 'battery_off.sh' }
