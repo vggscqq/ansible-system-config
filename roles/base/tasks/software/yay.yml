@@ -3,7 +3,7 @@
   ansible.builtin.file:
     path: /tmp/yay
     state: absent
-  become: yes
+  become: true
 
 - name: Clone yay
   tags: skip_ansible_lint
@@ -35,4 +35,4 @@
   ansible.builtin.file:
     path: /tmp/yay
     state: absent
-  become: yes
+  become: true

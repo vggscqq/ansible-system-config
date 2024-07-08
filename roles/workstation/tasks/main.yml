@@ -9,6 +9,9 @@
     - name: Install gnome
       ansible.builtin.import_tasks: desktop_environments/gnome/packages.yml
 
+    - name: Install gnome extra
+      ansible.builtin.import_tasks: desktop_environments/gnome/extra_packages.yml
+
     - name: Gnome | config | peripherals
       ansible.builtin.import_tasks: desktop_environments/gnome/peripherals.yml
 
