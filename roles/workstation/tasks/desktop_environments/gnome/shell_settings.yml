@@ -108,3 +108,11 @@
     regexp: '^(\s*python\s+~/.config/fish/greeting.py\s*)$'
     line: '    python ~/.config/fish/greeting.py workstation'
     state: present
+
+- name: Copy TODOs
+  ansible.builtin.copy:
+    src: TODO/
+    dest: ~/
+    owner: vgscq
+    group: vgscq
+    mode: '0644'

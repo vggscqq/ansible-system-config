@@ -55,7 +55,6 @@
     creates: /usr/bin/gnome-extensions-cli
   when: ansible_distribution == "Archlinux"
 
-
 - name: Gnome | packages | enable and start gdm
   tags: autofs,system,system setup
   ansible.builtin.service:
