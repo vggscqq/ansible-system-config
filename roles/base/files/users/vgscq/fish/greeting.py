@@ -21,10 +21,10 @@ def get_cpu_info():
 # Function to get CPU temperature
 def get_cpu_temperature():
     try:
-        result = subprocess.check_output(["awk", '{printf "%.0f", $1/1000}', "/sys/class/thermal/thermal_zone0/temp"])
+        result = subprocess.check_output(["awk", '{printf "%.0f", $1/1000}', "/sys/class/thermal/thermal_zone0/temp"], stderr=subprocess.DEVNULL)
         return result.decode().strip()
     except Exception:
-        return "N\\A"
+        return f"{r}N\\A{b} "
 
 # Function to calculate uptime
 def get_uptime():
@@ -137,7 +137,7 @@ def print_ip_addresses(ip_addresses):
 # Function to get Tailscale information
 def get_tailscale_info():
     try:
-        result = subprocess.check_output(["tailscale", "status", "-json"])
+        result = subprocess.check_output(["tailscale", "status", "-json"], stderr=subprocess.DEVNULL)
         data = json.loads(result.decode())
         return data
     except Exception:
@@ -163,6 +163,7 @@ def print_tailscale_info(peers):
                 tailscale_ip = tailscale_ips[0]
                 #print(f"\t\t\t{tailscale_ip}\t\t{online_status}\t{dns_name}")
                 print(f"\t\t\t{tailscale_ip}\t\t{dns_name[:-1]}")
+        print()
 
 
 
@@ -173,7 +174,7 @@ def check_internet():
 
 # Function to print internet information
 def print_internet_info():
-    istate = "\n{}*{} Internet: {}".format(w, b, check_internet())
+    istate = "{}*{} Internet: {}".format(w, b, check_internet())
     print(istate)
     if not "Fail" in istate:
         inet = subprocess.check_output(['ip', '-j', 'r', 'get', '1.1.1.1']).decode().splitlines()[0]
