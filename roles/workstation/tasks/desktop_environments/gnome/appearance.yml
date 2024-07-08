@@ -91,4 +91,44 @@
     - { key: right-active, value: "true" }
     - key: right-commands-json
       value: >
-        '{"commands":[{"isActive":true,"command":"/home/vgscq/.config/bin/powermon.sh","interval":5,"uuid":"d64681a8-4e6b-4f3f-85f3-d0c56580ba14"}]}'
+        '{"commands":[{"isActive":true,"command":"/home/vgscq/.config/bin/powermon.sh",\
+        "interval":5,"uuid":"d64681a8-4e6b-4f3f-85f3-d0c56580ba14"}]}'
+
+- name: Gnome | Extensions | Dash to Dock settings
+  tags: gnome,dash-to-dock
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/shell/extensions/dash-to-dock/{{ item.key }}"
+    value: "{{ item.value }}"
+  with_items:
+    - { key: always-center-icons, value: "true" }
+    - { key: apply-custom-theme, value: "false" }
+    - { key: background-opacity, value: "0.80000000000000004" }
+    - { key: custom-theme-shrink, value: "true" }
+    - { key: dash-max-icon-size, value: "24" }
+    - { key: dock-fixed, value: "false" }
+    - { key: dock-position, value: "'BOTTOM'" }
+    - { key: extend-height, value: "false" }
+    - { key: height-fraction, value: "0.90000000000000002" }
+    - { key: intellihide-mode, value: "'FOCUS_APPLICATION_WINDOWS'" }
+    - { key: max-alpha, value: "0.80000000000000004" }
+    - { key: multi-monitor, value: "true" }
+    - { key: require-pressure-to-show, value: "false" }
+    - { key: transparency-mode, value: "'DYNAMIC'" }
+
+- name: Gnome | Shell | Disable extension version validation
+  tags: gnome,shell
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/shell/disable-extension-version-validation"
+    value: "true"
+
+- name: Gnome | Window Manager | Set button layout
+  tags: gnome,wm
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/desktop/wm/preferences/button-layout"
+    value: "'appmenu:minimize,close'"
