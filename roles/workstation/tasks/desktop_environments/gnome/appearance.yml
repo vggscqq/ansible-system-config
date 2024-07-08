@@ -83,7 +83,7 @@
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/shell/extensions/executor/{{} item.key }}"
+    key: "/org/gnome/shell/extensions/executor/{{ item.key }}"
     value: "{{ item.value }}"
   with_items:
     - { key: center-active, value: "false" }
