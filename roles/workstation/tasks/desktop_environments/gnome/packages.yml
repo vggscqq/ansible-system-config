@@ -48,11 +48,12 @@
     creates: /usr/bin/gnome-terminal-transparency
   when: ansible_distribution == "Archlinux"
 
-- name: Install gnome-extensions-cli
-  ansible.builtin.pip:
-    name: gnome-extensions-cli
-    state: present
-    executable: pip
+- name: Install gnome-extensions-cli using yay
+  ansible.builtin.command:
+    cmd: yay -S --noconfirm gnome-extensions-cli
+  args:
+    creates: /usr/bin/gnome-extensions-cli
+  when: ansible_distribution == "Archlinux"
 
 
 - name: Gnome | packages | enable and start gdm
