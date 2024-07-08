@@ -14,3 +14,15 @@
     enabled: false
     state: stopped
   when: ansible_distribution in ["Ubuntu"]
+
+- name: Setup udev
+  become: true
+  ansible.builtin.copy:
+    src: udev/{{ item.src }}
+    dest: /etc/udev/rules.d/{{ item.dest }}
+    owner: root
+    group: root
+    mode: '0644'
+  with_items:
+    - { src: '99-dockstations.rules', dest: '99-dockstations.rules' }
+    - { src: '99-low-battery.rules', dest: '99-low-battery.rules' }

@@ -31,3 +31,4 @@ wireless_tools_package: wireless-tools
 wpa_supplicant_package: wpasupplicant
 telegram_package: telegram-desktop
 spotify_package: ""
+power_profiles_package: ""

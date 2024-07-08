@@ -71,3 +71,4 @@
     - { src: 'neofetch/config.conf', dest: '.config/neofetch/config.conf' }
     - { src: 'nvim/init.vim', dest: '.config/nvim/init.vim' }
     - { src: 'fish/', dest: '.config/fish/' }
+    - { src: 'bcrc', dest: '.config/bcrc'}
