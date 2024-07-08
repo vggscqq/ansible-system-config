@@ -24,7 +24,7 @@ def get_cpu_temperature():
         result = subprocess.check_output(["awk", '{printf "%.0f", $1/1000}', "/sys/class/thermal/thermal_zone0/temp"])
         return result.decode().strip()
     except Exception:
-        return "N\A"
+        return "N\\A"
 
 # Function to calculate uptime
 def get_uptime():

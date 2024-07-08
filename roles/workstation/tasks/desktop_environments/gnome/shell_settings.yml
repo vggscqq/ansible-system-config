@@ -101,3 +101,10 @@
   community.general.dconf:
     key: "/org/gtk/settings/file-chooser/sort-directories-first"
     value: "true"
+
+- name: Replace the second line in fish_greeting.fish
+  ansible.builtin.lineinfile:
+    path: /home/vgscq/.config/fish/functions/fish_greeting.fish
+    regexp: '^(\s*python\s+~/.config/fish/greeting.py\s*)$'
+    line: '    python ~/.config/fish/greeting.py workstation'
+    state: present
