@@ -38,3 +38,12 @@
   with_items:
     - { src: 'battery.sh', dest: 'battery.sh' }
     - { src: 'battery_off.sh', dest: 'battery_off.sh' }
+
+- name: Gnome | Extensions | Executor copy powermon.sh
+  tags: gnome,gnome-wallpaper
+  ansible.builtin.copy:
+    src: gnome/powermon.sh
+    dest: /home/vgscq/.config/bin/
+    owner: vgscq
+    group: vgscq
+    mode: '0755'
