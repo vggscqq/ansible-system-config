@@ -25,8 +25,7 @@
         command: >
           VBoxManage extpack install --replace /tmp/Oracle_VM_VirtualBox_Extension_Pack-{{ virtualbox_version }}.vbox-extpack
         responses:
-          - "Do you agree? [y/n]:"
-          - "y"
+          Do you agree? [y/n]: "y"
       args:
         creates: "/usr/lib/virtualbox/ExtensionPacks/Oracle_VM_VirtualBox_Extension_Pack"
 
