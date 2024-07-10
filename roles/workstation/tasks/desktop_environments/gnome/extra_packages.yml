@@ -6,7 +6,7 @@
       - firefox
       - "{{ spotify_package }}"
       - "remmina"
-      - "{{ virtualbox_package }}"
+      # - "{{ virtualbox_package }}"
       - "{{ gstreamer_libav_package }}"
       - "{{ gstreamer_plugins_bad_package }}"
       - qbittorrent
@@ -30,7 +30,7 @@
 #     creates: /usr/bin/cohesion
 #   when: ansible_distribution == "Archlinux"
 
-- name: qbittorrent config copy
+- name: Qbittorrent config copy
   ansible.builtin.copy:
     src: config/qBittorrent
     dest: /home/vgscq/.config/

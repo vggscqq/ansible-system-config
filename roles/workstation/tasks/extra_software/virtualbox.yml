@@ -1,0 +1,37 @@
+block:
+  vars:
+    virtualbox_version_url: "https://download.virtualbox.org/virtualbox/LATEST.TXT"
+    extension_pack_url_template: "https://download.virtualbox.org/virtualbox/{version}/Oracle_VM_VirtualBox_Extension_Pack-{version}.vbox-extpack"
+    extension_pack_dest: "/tmp/Oracle_VM_VirtualBox_Extension_Pack-{version}.vbox-extpack"
+
+  tasks:
+    - name: Fetch latest VirtualBox version
+      ansible.builtin.uri:
+        url: "{{ virtualbox_version_url }}"
+        return_content: true
+      register: virtualbox_version_response
+
+    - name: Set VirtualBox version
+      ansible.builtin.set_fact:
+        virtualbox_version: "{{ virtualbox_version_response.content | trim }}"
+
+    - name: Install VirtualBox
+      ansible.builtin.package:
+        name: virtualbox
+        state: present
+
+    - name: Download VirtualBox Extension Pack
+      ansible.builtin.get_url:
+        url: "{{ extension_pack_url_template | format(version=virtualbox_version) }}"
+        dest: "{{ extension_pack_dest | format(version=virtualbox_version) }}"
+
+    - name: Install VirtualBox Extension Pack
+      ansible.builtin.command: >
+        VBoxManage extpack install --replace {{ extension_pack_dest | format(version=virtualbox_version) }}
+      args:
+        creates: "/usr/lib/virtualbox/ExtensionPacks/Oracle_VM_VirtualBox_Extension_Pack"
+
+    - name: Clean up Extension Pack file
+      ansible.builtin.file:
+        path: "{{ extension_pack_dest | format(version=virtualbox_version) }}"
+        state: absent
