@@ -9,9 +9,14 @@
     virtualbox_version: "{{ virtualbox_version_response.content | trim }}"
 
 - block:
-    - name: Install VirtualBox
+    - name: Install pexpect in order to accept virtualboxes EULA
       ansible.builtin.package:
         name: virtualbox
+        state: present
+
+    - name: Install VirtualBox
+      ansible.builtin.package:
+        name: python-pexpect
         state: present
 
     - name: Download VirtualBox Extension Pack
