@@ -27,5 +27,8 @@
     - name: System tweaks
       ansible.builtin.import_tasks: system_setup/tweaks.yml
 
-    - name: Extra softwaer | VirtualBox
+    - name: Extra software | VirtualBox
       ansible.builtin.import_tasks: extra_software/virtualbox.yml
+
+    - name: Extra software | Telegram
+      ansible.builtin.import_tasks: extra_software/telegram.yml
