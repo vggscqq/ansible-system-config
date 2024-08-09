@@ -47,3 +47,59 @@
     owner: vgscq
     group: vgscq
     mode: '0755'
+
+- name: Install ZRAM
+  block:
+    - name: Install required packages
+      ansible.builtin.package:
+        name:
+          - util-linux  # for mkswap
+        state: present
+
+    - name: Create the zram configuration script
+      ansible.builtin.copy:
+        dest: /usr/local/bin/configure-zram.sh
+        content: |
+          #!/bin/bash
+          modprobe zram
+          zramctl /dev/zram0 --algorithm zstd --size "$(($(grep MemTotal /proc/meminfo | tr -dc '0-9')/2))KiB"
+          mkswap /dev/zram0
+          swapon /dev/zram0
+        mode: '0755'
+
+    - name: Create the systemd service file
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/zram.service
+        content: |
+          [Unit]
+          Description=Configure zram device
+
+          [Service]
+          Type=oneshot
+          ExecStart=/usr/local/bin/configure-zram.sh
+          RemainAfterExit=true
+
+          [Install]
+          WantedBy=multi-user.target
+        mode: '0644'
+
+    - name: Create sysctl config for zram
+      ansible.builtin.copy:
+        dest: /etc/sysctl.d/99-vm-zram-parameters.conf
+        content: |
+          vm.swappiness = 180
+          vm.watermark_boost_factor = 0
+          vm.watermark_scale_factor = 125
+          vm.page-cluster = 0
+        mode: '0644'
+
+    - name: Reload systemd daemon
+      ansible.builtin.systemd:
+        daemon_reload: true
+
+    - name: Enable and start zram service
+      ansible.builtin.systemd:
+        name: zram.service
+        enabled: true
+        state: started
+

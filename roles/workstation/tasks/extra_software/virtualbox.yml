@@ -8,7 +8,9 @@
   ansible.builtin.set_fact:
     virtualbox_version: "{{ virtualbox_version_response.content | trim }}"
 
-- block:
+- name: "Install VirtualBox and Extension Pack"
+  when: virtualbox_version is defined
+  block:
     - name: Install pexpect in order to accept virtualboxes EULA
       ansible.builtin.package:
         name: virtualbox
@@ -39,5 +41,3 @@
       ansible.builtin.file:
         path: "/tmp/Oracle_VM_VirtualBox_Extension_Pack-{{ virtualbox_version }}.vbox-extpack"
         state: absent
-  when: virtualbox_version is defined
-  name: "Install VirtualBox and Extension Pack"
