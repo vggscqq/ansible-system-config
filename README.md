@@ -40,7 +40,7 @@ This playbook will perform the following tasks:
 ## Requirements
 
 - Ansible must be installed on the control node.
-- The target machine should be running a compatible Linux distribution (Arch, Debian, Ubuntu).
+- The target machine should be running Arch btw
 
 ## Usage
 Do not use it. It won't satisfy you and might break something since it's tailored to my use.
