@@ -16,7 +16,7 @@
 - name: Gnome | appearance | copy wallpaper file
   tags: gnome,gnome-wallpaper
   ansible.builtin.copy:
-    src: gnome/3.jpg
+    src: gnome/green.jpg
     dest: /usr/share/backgrounds/vgscq/vgscq-wallpaper.png
     owner: root
     group: root
@@ -30,13 +30,24 @@
     key: "/org/gnome/desktop/background/picture-uri-dark"
     value: "'file:///usr/share/backgrounds/vgscq/vgscq-wallpaper.png'"
 
-- name: Gnome | appearance | set wallpaper position
-  tags: gnome,gnome-wallpaper
+- name: Gnome | Set picture options to 'zoom' for background and screensaver
+  tags: gnome,gnome-shell
   become_user: vgscq
   become: true
   community.general.dconf:
-    key: "/org/gnome/desktop/background/picture-options"
-    value: "'stretched'"
+    key: "{{ item }}"
+    value: "'zoom'"
+  with_items:
+    - "/org/gnome/desktop/background/picture-options"
+    - "/org/gnome/desktop/screensaver/picture-options"
+
+- name: Gnome | Remove camera shutter sound file
+  tags: cleanup
+  become: true
+  ansible.builtin.file:
+    path: /usr/share/sounds/freedesktop/stereo/camera-shutter.oga
+    state: absent
+
 
 - name: Gnome | appearance | Ensure unzip is installed
   ansible.builtin.package:
@@ -125,6 +136,14 @@
     key: "/org/gnome/shell/disable-extension-version-validation"
     value: "true"
 
+- name: Gnome | Shell | Set CZ date format
+  tags: gnome,shell
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/system/locale/region"
+    value: "'cs_CZ.UTF-8'"
+
 - name: Gnome | Window Manager | Set button layout
   tags: gnome,wm
   become_user: vgscq
@@ -132,3 +151,16 @@
   community.general.dconf:
     key: "/org/gnome/desktop/wm/preferences/button-layout"
     value: "'appmenu:minimize,close'"
+
+- name: Ensure the lines are uncommented in /etc/locale.gen
+  ansible.builtin.lineinfile:
+    path: /etc/locale.gen
+    regexp: "^#(cs_CZ.UTF-8 UTF-8|en_US.UTF-8 UTF-8)"
+    line: "\\1"
+    state: present
+    backrefs: yes
+  register: locale_gen_changed
+
+- name: Gnome | Locale | Generate locales using locale-gen
+  ansible.builtin.command: locale-gen
+  when: locale_gen_changed.changed

@@ -94,6 +94,22 @@
     key: "/org/gnome/gnome-screenshot/auto-save-directory"
     value: "'/tmp'"
 
+- name: Gnome | shell settings | Make SF Mono a monospace font
+  tags: gnome,gnome-shell
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/desktop/interface/monospace-font-name"
+    value: "'SF Mono Medium 10'"
+
+- name: Gnome | Mutter | Enable experimental features for scaling
+  tags: gnome,gnome-shell
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/mutter/experimental-features"
+    value: "['scale-monitor-framebuffer']"
+
 - name: Gnome | nautilus | set directories to be shown first
   tags: gnome,gnome-shell
   become_user: vgscq
@@ -116,3 +132,16 @@
     owner: vgscq
     group: vgscq
     mode: '0644'
+
+- name: Find all .sh files in the TODO directory
+  ansible.builtin.find:
+    paths: /home/vgscq/TODO
+    patterns: '*.sh'
+  register: sh_files
+
+- name: Make .sh files executable
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    mode: '0755'
+  loop: "{{ sh_files.files }}"
+  when: sh_files.matched > 0

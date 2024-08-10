@@ -11,24 +11,31 @@
       - "{{ gstreamer_plugins_bad_package }}"
       - qbittorrent
       - vlc
+      - xorg-xwayland
 
-# - name: Gnome | YAY | Install cohesion [1/2]
-#   become_user: vgscq
-#   become: true
-#   ansible.builtin.command:
-#     cmd: yay -S --noconfirm nvm
-#   args:
-#     creates: /usr/share/nvm/nvm.sh
-#   when: ansible_distribution == "Archlinux"
+- name: Gnome | YAY | Install nvm
+  yay:
+    name:
+      - nvm
+    state: latest
 
-# - name: Gnome | YAY | Install cohesion [2/2]
-#   become_user: vgscq
-#   become: true
-#   ansible.builtin.command:
-#     cmd: yay -S --noconfirm cohesion-git
-#   args:
-#     creates: /usr/bin/cohesion
-#   when: ansible_distribution == "Archlinux"
+- name: Gnome | YAY | Install cohesion
+  yay:
+    name:
+      - cohesion-git
+    state: latest
+
+- name: Gnome | YAY | Install spotify
+  yay:
+    name:
+      - spotify
+    state: latest
+
+- name: Gnome | YAY | Install vs code
+  yay:
+    name:
+      - visual-studio-code-bin
+    state: latest
 
 - name: Qbittorrent config copy
   ansible.builtin.copy:

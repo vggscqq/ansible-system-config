@@ -17,3 +17,6 @@
     - name: Install yay
       ansible.builtin.import_tasks: software/yay.yml
       when: ansible_distribution == "Archlinux"
+    
+    - name: Import base config
+      ansible.builtin.import_tasks: base.yml

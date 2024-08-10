@@ -21,6 +21,6 @@
       - "{{ python_pip_package }}"
       - "{{ python_passlib_package }}"
       - "{{ python_psutil_package }}"
-      - "tailscale"
+      - tailscale
       - jq
       - less

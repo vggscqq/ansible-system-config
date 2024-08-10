@@ -9,7 +9,6 @@ REPO_URL="https://github.com/${GITHUB_USERNAME}/${GITHUB_REPOSITORY}.git"
 
 # Fetch directory content from GitHub API
 response=$(curl -s $GITHUB_API_URL)
-echo $response
 
 # Check if response is valid JSON
 if echo "$response" | jq empty > /dev/null 2>&1; then
