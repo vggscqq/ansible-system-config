@@ -1,10 +1,2 @@
 [workstation]
-archlinuxtesting
-vgscq-laptop
-
-[server]
-orange
-arch-docker
-red
-green
-anthracite
+vgscq-laptop connection_type=local

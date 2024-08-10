@@ -63,4 +63,4 @@
   become: true
   community.general.dconf:
     key: "/org/gnome/shell/keybindings/show-screen-recording-ui"
-    value: "[]"
+    value: "['']"

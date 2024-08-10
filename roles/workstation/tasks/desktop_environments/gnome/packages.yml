@@ -42,19 +42,31 @@
     state: absent
   when: ansible_distribution == "Archlinux"
 
+  #- name: Install gnome-terminal-transparency using yay
+  #ansible.builtin.command:
+  #  cmd: yay -S --noconfirm gnome-terminal-transparency
+  #args:
+  #  creates: /usr/bin/gnome-terminal-transparency
+  #when: ansible_distribution == "Archlinux"
+
+  #- name: Install gnome-extensions-cli using yay
+  #ansible.builtin.command:
+  #  cmd: yay -S --noconfirm gnome-extensions-cli
+  #args:
+  #  creates: /usr/bin/gnome-extensions-cli
+  #when: ansible_distribution == "Archlinux"
+
 - name: Install gnome-terminal-transparency using yay
-  ansible.builtin.command:
-    cmd: yay -S --noconfirm gnome-terminal-transparency
-  args:
-    creates: /usr/bin/gnome-terminal-transparency
-  when: ansible_distribution == "Archlinux"
+  yay:
+    name:
+      - gnome-terminal-transparency
+    state: latest
 
 - name: Install gnome-extensions-cli using yay
-  ansible.builtin.command:
-    cmd: yay -S --noconfirm gnome-extensions-cli
-  args:
-    creates: /usr/bin/gnome-extensions-cli
-  when: ansible_distribution == "Archlinux"
+  yay:
+    name:
+      - gnome-extensions-cli
+    state: latest
 
 - name: Install gnome connector
   ansible.builtin.package:

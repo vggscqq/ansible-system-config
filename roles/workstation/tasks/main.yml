@@ -27,6 +27,9 @@
     - name: System tweaks
       ansible.builtin.import_tasks: system_setup/tweaks.yml
 
+    - name: Gnome | Keybinds
+      ansible.builtin.import_tasks: desktop_environments/gnome/keybindings.yml
+
     - name: Extra software | VirtualBox
       ansible.builtin.import_tasks: extra_software/virtualbox.yml
 
