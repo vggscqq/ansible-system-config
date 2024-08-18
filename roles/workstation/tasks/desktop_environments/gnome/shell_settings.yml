@@ -118,7 +118,19 @@
     key: "/org/gtk/settings/file-chooser/sort-directories-first"
     value: "true"
 
-- name: Replace the second line in fish_greeting.fish
+- name: Gnome | shell | Disable suspend by timeout
+  tags: gnome,terminal
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/settings-daemon/plugins/power/{{ item.key }}"
+    value: "{{ item.value }}"
+  with_items:
+    - { key: sleep-inactive-battery-type, value: "'nothing'" }
+    - { key: sleep-inactive-ac-type, value: "'nothing'" }
+
+
+- name: Gnome | Fish greeting | Enable workstation mode | fish_greeting.fish
   ansible.builtin.lineinfile:
     path: /home/vgscq/.config/fish/functions/fish_greeting.fish
     regexp: '^(\s*python\s+~/.config/fish/greeting.py\s*)$'

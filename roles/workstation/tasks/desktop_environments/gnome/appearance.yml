@@ -42,12 +42,19 @@
     - "/org/gnome/desktop/screensaver/picture-options"
 
 - name: Gnome | Remove camera shutter sound file
-  tags: cleanup
+  tags: gnome,gnome-shell
   become: true
   ansible.builtin.file:
     path: /usr/share/sounds/freedesktop/stereo/camera-shutter.oga
     state: absent
 
+- name: Gnome | Calendar show week date
+  tags: gnome,shell
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/desktop/calendar/show-weekdate"
+    value: "true"
 
 - name: Gnome | appearance | Ensure unzip is installed
   ansible.builtin.package:
@@ -80,7 +87,7 @@
     key: "/org/gnome/shell/favorite-apps"
     value: "['firefox.desktop', \
       'org.telegram.desktop.desktop', \
-      'com.spotify.Client.desktop', \
+      'СПОТИК', \
       'org.gnome.Terminal.desktop', \
       'org.gnome.Nautilus.desktop', \
       'winbox.desktop', \
@@ -144,6 +151,14 @@
     key: "/org/gnome/system/locale/region"
     value: "'cs_CZ.UTF-8'"
 
+- name: Gnome | Shell | 12h format
+  tags: gnome,shell
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/desktop/interface/clock-format"
+    value: "'12h'"
+
 - name: Gnome | Window Manager | Set button layout
   tags: gnome,wm
   become_user: vgscq
@@ -164,3 +179,4 @@
 - name: Gnome | Locale | Generate locales using locale-gen
   ansible.builtin.command: locale-gen
   when: locale_gen_changed.changed
+

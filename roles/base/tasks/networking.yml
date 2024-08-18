@@ -1,0 +1,65 @@
+- name: Networking | Ensure tailscaled service is enabled and running
+  ansible.builtin.systemd:
+    name: tailscaled
+    enabled: true
+    state: started
+
+- name: Networking | Configure dnsmasq
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/dnsmasq.conf
+    owner: root
+    group: root
+    mode: '0644'
+    content: |
+      user=dnsmasq
+      group=dnsmasq
+      interface=lo
+      bind-interfaces
+      cache-size=10000
+      server=/roboauto.tech/10.139.0.1
+      server=/roboauto.lan/10.139.0.1
+      server=/ts.net/100.100.100.100
+      address=/me.lan/127.0.0.1
+      server=1.1.1.1
+
+- name: Networking | Ensure NetworkManager is configured with dns=none in [main] section
+  become: true
+  community.general.ini_file:
+    path: /etc/NetworkManager/NetworkManager.conf
+    section: main
+    option: dns
+    value: none
+    mode: '0644'
+    backup: true
+  register: networkmanager_config
+
+- name: Networking | Restart NetworkManager if configuration changed
+  become: true
+  ansible.builtin.service:
+    name: NetworkManager
+    state: restarted
+  when: networkmanager_config.changed
+
+- name: Networking | Ensure /etc/resolv.conf is not a symlink
+  become: true
+  ansible.builtin.file:
+    path: /etc/resolv.conf
+    state: file
+    force: true
+
+- name: Networking | Ensure /etc/resolv.conf points to local dns server
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/resolv.conf
+    owner: root
+    group: root
+    mode: '0644'
+    content: |
+      nameserver 127.0.0.1
+
+- name: Networking | Ensure dnsmasq service is enabled and running
+  ansible.builtin.systemd:
+    name: dnsmasq
+    enabled: true
+    state: restarted

@@ -19,10 +19,10 @@
       - nvm
     state: latest
 
-- name: Gnome | YAY | Install cohesion
+- name: Gnome | YAY | Install notion
   yay:
     name:
-      - cohesion-git
+      - notion-app-electron
     state: latest
 
 - name: Gnome | YAY | Install spotify

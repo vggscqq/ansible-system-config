@@ -81,13 +81,15 @@ fi
 # fi
 # 
 
-read -r -p "Are you sure? [y/N] " response
-case "$response" in
-    [yY][eE][sS]|[yY])
-        echo "Running ansible-pull with tags: $tags"
-        echo PYTHONUNBUFFERED=true ansible-pull -U $REPO_URL --tags "$tags"
-        ;;
-    *)
-        echo "Exiting."
-        ;;
-esac
+#####read -r -p "Are you sure? [y/N] " response
+#####case "$response" in
+#####    [yY][eE][sS]|[yY])
+#####        echo "Running ansible-pull with tags: $tags"
+#####        echo PYTHONUNBUFFERED=true ansible-pull -U $REPO_URL --tags "$tags"
+#####        ;;
+#####    *)
+#####        echo "Exiting."
+#####        ;;
+#####esac
+
+ansible-playbook --connection=local ./local.yml --tags "$tags"

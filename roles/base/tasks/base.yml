@@ -1,5 +1,0 @@
-- name: Ensure tailscaled service is enabled and running
-  ansible.builtin.systemd:
-    name: tailscaled
-    enabled: yes
-    state: started

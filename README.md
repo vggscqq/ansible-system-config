@@ -45,4 +45,4 @@ This playbook will perform the following tasks:
 ## Usage
 Do not use it. It won't satisfy you and might break something since it's tailored to my use.
 
-* You should use it as an example.
+* You should use it as an example only.

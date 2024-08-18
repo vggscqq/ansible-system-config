@@ -1,0 +1,12 @@
+- name: Check if the GPU is AMD
+  ansible.builtin.shell: lspci | grep -i 'VGA compatible controller'
+  register: gpu_info
+  changed_when: false
+
+- name: Install GPU related packages for AMD GPUs
+  ansible.builtin.package:
+    name:
+      - amdvlk
+      - libva-mesa-driver
+      - mesa-vdpau
+  when: "'AMD' in gpu_info.stdout or 'amdgpu' in gpu_info.stdout"

@@ -27,6 +27,9 @@
     - name: System tweaks
       ansible.builtin.import_tasks: system_setup/tweaks.yml
 
+    - name: Video
+      ansible.builtin.import_tasks: extra_software/video.yml
+
     - name: Gnome | Keybinds
       ansible.builtin.import_tasks: desktop_environments/gnome/keybindings.yml
 
