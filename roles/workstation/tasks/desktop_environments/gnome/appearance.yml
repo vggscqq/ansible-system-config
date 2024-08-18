@@ -80,22 +80,79 @@
   changed_when: true
   become: true
 
+
+# - name: Gnome | appearance | Pinned apps bar
+#   become_user: vgscq
+#   become: true
+#   community.general.dconf:
+#     key: "/org/gnome/shell/favorite-apps"
+#     value: "['firefox.desktop', \
+#       'org.telegram.desktop.desktop', \
+#       'spotify.desktop', \
+#       'notion.desktop', \
+#       'org.gnome.Terminal.desktop', \
+#       'code.desktop', \
+#       'org.gnome.Nautilus.desktop', \
+#       'winbox.desktop', \
+#       'virtualbox.desktop', \
+#       'org.gnome.TextEditor.desktop', \
+#       'org.remmina.Remmina.desktop']"
+
+
+
+      #- 'firefox.desktop'
+      #- 'org.telegram.desktop.desktop'
+      #- 'spotify.desktop'
+      #- 'notion.desktop'
+      #- 'org.gnome.Terminal.desktop'
+      #- 'code.desktop'
+      #- 'org.gnome.Nautilus.desktop'
+      #- 'org.remmina.Remmina.desktop'
+
 - name: Gnome | appearance | Pinned apps bar
-  become_user: vgscq
+  block:
+  - name: Get the current list of pinned apps
+    community.general.dconf:
+      key: "/org/gnome/shell/favorite-apps"
+      state: read
+    register: current_pinned_apps
+
+  - name: Ensure the current pinned apps list is not None
+    ansible.builtin.set_fact:
+      pinned_apps: "{{ current_pinned_apps.value | default([]) }}"
+
+  - name: Determine remaining apps
+    ansible.builtin.set_fact:
+      remaining_apps: "{{ pinned_apps | difference(required_apps) }}"
+
+  - name: Ensure Firefox, Telegram, and Spotify are the first in the list
+    community.general.dconf:
+      key: "/org/gnome/shell/favorite-apps"
+      value: "{{ required_apps + remaining_apps }}"
+
   become: true
-  community.general.dconf:
-    key: "/org/gnome/shell/favorite-apps"
-    value: "['firefox.desktop', \
-      'org.telegram.desktop.desktop', \
-      'СПОТИК', \
-      'org.gnome.Terminal.desktop', \
-      'org.gnome.Nautilus.desktop', \
-      'winbox.desktop', \
-      'code.desktop', \
-      'virtualbox.desktop', \
-      'org.gnome.TextEditor.desktop', \
-      'org.remmina.Remmina.desktop', \
-      'io.github.brunofin.Cohesion.desktop']"
+  become_user: vgscq
+  vars:
+    required_apps:
+      - 'firefox.desktop'
+      - 'org.telegram.desktop.desktop'
+      - 'spotify.desktop'
+
+- name: Gnome | appearance | Download profile picture
+  become: true
+  get_url:
+    url: https://i.imgur.com/mqsRlbt.png
+    dest: /var/lib/AccountsService/icons/vgscq
+    force: true
+
+- name: Gnome | appearance | Set profile picture
+  become: true
+  lineinfile:
+    path: /var/lib/AccountsService/users/vgscq
+    regexp: '^Icon='
+    line: 'Icon=/var/lib/AccountsService/icons/vgscq'
+
+
 
 - name: Gnome | Extensions | Executor install
   become_user: vgscq

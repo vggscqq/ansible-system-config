@@ -25,3 +25,4 @@
       - jq
       - less
       - dnsmasq
+      - bc
