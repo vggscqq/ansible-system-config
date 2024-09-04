@@ -26,3 +26,4 @@
       - less
       - dnsmasq
       - bc
+      - wireguard-tools

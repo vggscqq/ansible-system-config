@@ -26,6 +26,9 @@
       - nautilus
       - "{{ power_profiles_package }}"
       - dconf-editor
+      - gnome-weather
+      - cheese
+      - net-tools
 
 # It appears as though Debian and Ubuntu place GNOME support for openvpn in a separate package
 # This doesn't seem to be required in archlinux.

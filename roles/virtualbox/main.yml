@@ -1,0 +1,9 @@
+# Load distro-specific variables
+- name: Load distro-specific variables
+  ansible.builtin.include_vars: "{{ ansible_distribution }}.yml"
+  tags: always
+
+- name: Ensure necessary workstation tasks are imported
+  block:
+    - name: Extra software | VirtualBox
+      ansible.builtin.import_tasks: virtualbox.yml

@@ -33,8 +33,5 @@
     - name: Gnome | Keybinds
       ansible.builtin.import_tasks: desktop_environments/gnome/keybindings.yml
 
-    - name: Extra software | VirtualBox
-      ansible.builtin.import_tasks: extra_software/virtualbox.yml
-
     - name: Extra software | Telegram
       ansible.builtin.import_tasks: extra_software/telegram.yml

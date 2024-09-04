@@ -64,3 +64,19 @@
   community.general.dconf:
     key: "/org/gnome/shell/keybindings/show-screen-recording-ui"
     value: "['']"
+
+- name: Gnome | Keybindings | Switch workspace only
+  tags: gnome,gnome-shell
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/shell/window-switcher/current-workspace-only"
+    value: "false"
+
+- name: Gnome | Keybindings | Switch windows
+  tags: gnome,gnome-shell
+  become_user: vgscq
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/desktop/wm/keybindings/switch-windows"
+    value: "['<Alt>Tab']"
