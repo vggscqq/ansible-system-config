@@ -51,7 +51,6 @@
     mode: '0644'
     backup: true
   register: networkmanager_config
-  notify: Restart NetworkManager
 
 - name: Networking | Ensure /etc/resolv.conf is not a symlink
   become: true
