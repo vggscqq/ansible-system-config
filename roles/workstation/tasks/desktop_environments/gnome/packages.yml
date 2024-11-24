@@ -4,7 +4,7 @@
     name:
       - eog
       - file-roller
-      - "{{ gdm_package }}"
+      - gdm
       - gedit
       - gnome-backgrounds
 #      - gnome-books
@@ -24,7 +24,7 @@
  #     - gnome-todo
       - gnome-tweaks
       - nautilus
-      - "{{ power_profiles_package }}"
+      - power-profiles-daemon
       - dconf-editor
       - gnome-weather
       - cheese
