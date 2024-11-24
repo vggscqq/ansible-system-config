@@ -14,3 +14,4 @@
 
     - name: Import networking tasts
       ansible.builtin.import_tasks: networking.yml
+      ansible.builtin.import_tasts: networking_handlers.yml

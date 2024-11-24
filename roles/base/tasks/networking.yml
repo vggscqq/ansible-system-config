@@ -75,9 +75,3 @@
     name: dnsmasq
     enabled: true
     state: restarted
-
-  handlers:
-    - name: Restart NetworkManager
-      ansible.builtin.systemd:
-        name: NetworkManager
-        state: restarted
