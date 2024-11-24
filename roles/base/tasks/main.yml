@@ -1,8 +1,3 @@
-# Load distro-specific variables
-- name: Load distro-specific variables
-  ansible.builtin.include_vars: "{{ ansible_distribution }}.yml"
-  tags: always
-
 - name: Ensure necessary basic tasks are imported
   block:
     # Install software
@@ -16,10 +11,6 @@
     # Make sure yay installed
     - name: Install yay
       ansible.builtin.import_tasks: software/yay.yml
-      when: ansible_distribution == "Archlinux"
-    
-    #- name: Import base config
-    #  ansible.builtin.import_tasks: base.yml
-    
+
     - name: Import networking tasts
       ansible.builtin.import_tasks: networking.yml

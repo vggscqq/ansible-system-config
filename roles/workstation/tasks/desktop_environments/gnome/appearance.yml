@@ -80,60 +80,27 @@
   changed_when: true
   become: true
 
-
-# - name: Gnome | appearance | Pinned apps bar
-#   become_user: vgscq
-#   become: true
-#   community.general.dconf:
-#     key: "/org/gnome/shell/favorite-apps"
-#     value: "['firefox.desktop', \
-#       'org.telegram.desktop.desktop', \
-#       'spotify.desktop', \
-#       'notion.desktop', \
-#       'org.gnome.Terminal.desktop', \
-#       'code.desktop', \
-#       'org.gnome.Nautilus.desktop', \
-#       'winbox.desktop', \
-#       'virtualbox.desktop', \
-#       'org.gnome.TextEditor.desktop', \
-#       'org.remmina.Remmina.desktop']"
-
-
-
-      #- 'firefox.desktop'
-      #- 'org.telegram.desktop.desktop'
-      #- 'spotify.desktop'
-      #- 'notion.desktop'
-      #- 'org.gnome.Terminal.desktop'
-      #- 'code.desktop'
-      #- 'org.gnome.Nautilus.desktop'
-      #- 'org.remmina.Remmina.desktop'
-
-- name: Gnome | appearance | Pinned apps bar
+- name: Gnome | appearance | Configure favorite apps in dock
   block:
-  - name: Get the current list of pinned apps
-    community.general.dconf:
-      key: "/org/gnome/shell/favorite-apps"
-      state: read
-    register: current_pinned_apps
+    - name: Read current favorite apps configuration
+      community.general.dconf:
+        key: "/org/gnome/shell/favorite-apps"
+        state: read
+      register: current_pinned_apps
 
-  - name: Ensure the current pinned apps list is not None
-    ansible.builtin.set_fact:
-      pinned_apps: "{{ current_pinned_apps.value | default([]) }}"
+    - name: Set default pinned apps list if none exists
+      ansible.builtin.set_fact:
+        current_favorites: "{{ current_pinned_apps.value | default([]) }}"
 
-  - name: Determine remaining apps
-    ansible.builtin.set_fact:
-      remaining_apps: "{{ pinned_apps | difference(required_apps) }}"
-
-  - name: Ensure Firefox, Telegram, and Spotify are the first in the list
-    community.general.dconf:
-      key: "/org/gnome/shell/favorite-apps"
-      value: "{{ required_apps + remaining_apps }}"
+    - name: Update favorite apps configuration
+      community.general.dconf:
+        key: "/org/gnome/shell/favorite-apps"
+        value: "{{ favorite_apps_order + (current_favorites | difference(favorite_apps_order)) }}"
 
   become: true
   become_user: vgscq
   vars:
-    required_apps:
+    favorite_apps_order:
       - 'firefox.desktop'
       - 'org.telegram.desktop.desktop'
       - 'spotify.desktop'

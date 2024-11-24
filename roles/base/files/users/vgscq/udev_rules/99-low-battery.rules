@@ -1,0 +1,7 @@
+# on low battery (<15) run keyboard blink
+SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[5-9]|[10-15]", RUN+="/home/vgscq/.config/bin/udev/battery.sh blink"
+# on low battery <5 suspend
+SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[1-5]", RUN+="/usr/bin/systemctl suspend"
+
+#Stop keyboard blinking on power adapter connect
+SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_ONLINE}=="1", RUN+="/home/vgscq/.config/bin/udev/battery_off.sh"

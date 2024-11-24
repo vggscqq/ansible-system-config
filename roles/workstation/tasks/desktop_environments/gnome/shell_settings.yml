@@ -129,7 +129,6 @@
     - { key: sleep-inactive-battery-type, value: "'nothing'" }
     - { key: sleep-inactive-ac-type, value: "'nothing'" }
 
-
 - name: Gnome | Fish greeting | Enable workstation mode | fish_greeting.fish
   ansible.builtin.lineinfile:
     path: /home/vgscq/.config/fish/functions/fish_greeting.fish

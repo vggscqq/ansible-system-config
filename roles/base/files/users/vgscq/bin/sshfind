@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#cat .ssh/conf.d/roboauto.conf | grep -B1 $1
+#cat .ssh/conf.d/roboauto.conf | grep -A1 $1
+#cat .ssh/conf.d/roboauto.conf | grep -A1 -B1 $1
+
+awk '
+                         $1 == "Host" { 
+                             host = $1 ": " $2; 
+                         } 
+                         $1 == "HostName" { 
+                             $1 = ""; 
+                             sub( /^[[:space:]]*/, "" ); 
+                             printf "%s - IP: %s\n", host, $0;
+                         }
+                     ' ~/.ssh/conf.d/*.conf | grep $1

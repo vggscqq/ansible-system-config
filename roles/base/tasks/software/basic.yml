@@ -5,7 +5,7 @@
       - fish
       - curl
       - htop
-      - "{{ lm_sensors_package }}"
+      - lm_sensors
       - lsof
       - mc
       - ncdu
@@ -16,11 +16,11 @@
       - sshfs
       - tmux
       - traceroute
-      - "{{ nvim_package }}"
+      - neovim
       - wget
-      - "{{ python_pip_package }}"
-      - "{{ python_passlib_package }}"
-      - "{{ python_psutil_package }}"
+      - python-pip
+      - python-passlib
+      - python-psutil
       - tailscale
       - jq
       - less

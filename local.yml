@@ -1,67 +1,46 @@
 ---
-# tasks to complete before running roles
-- hosts: all
-  tags: always
+# Common pre-tasks for all hosts
+- name: Pre-configuration tasks
+  hosts: all
   become: true
+  tags:
+    - always
+    - setup
 
   pre_tasks:
-    - name: pre-run | update package cache (arch)
-      tags: always
-      pacman: update_cache=yes
-      changed_when: False
+    - name: Update package cache (Arch Linux)
+      community.general.pacman:
+        update_cache: true
+      changed_when: false
       when: ansible_distribution == "Archlinux"
+      tags:
+        - always
 
-    - name: pre-run | update package cache (debian, etc)
-      tags: always
-      apt: update_cache=yes
-      changed_when: False
-      when: ansible_distribution in ["Debian", "Ubuntu"]
-
-# need to be installed in order to playbook to work
   tasks:
-  - name: install ansible packages
-    package:
-      name:
-        - unrar
-        - rsync
+    - name: Install required system packages
+      ansible.builtin.package:
+        name: "{{ required_packages }}"
+        state: present
+      vars:
+        required_packages:
+          - unrar
+          - rsync
+      tags:
+        - packages
+        - setup
 
-# run roles
-- hosts: all
-  tags: base
+# Role-based configurations
+- name: Apply base configuration
+  hosts: all
   become: true
   roles:
     - base
 
-- hosts: workstation
-  tags: workstation
+- name: Configure workstation
+  hosts: workstation
   become: true
   roles:
     - workstation
-
-- hosts: server
-  tags: server
-  become: true
-  roles:
-    - server
-
-# end of run: cleanup (debian and ubuntu only)
-- hosts: all
-  become: true
-  tasks:
-  - name: cleanup package cache (debian and ubuntu)
-    tags: always
-    apt:
-      autoclean: yes
-    changed_when: false
-    when: ansible_distribution in ["Debian", "Ubuntu"]
-
-  - name: autoremove orphan packages (debian and ubuntu)
-    tags: always
-    apt:
-      autoremove: yes
-      purge: yes
-    when: ansible_distribution in ["Debian", "Ubuntu"]
-
 
 #  - name: set up sudo for ansible user
 #    copy:
@@ -107,5 +86,3 @@
 #      name: ansible-pull.timer
 #      enabled: yes
 #      state: started
-#
-#

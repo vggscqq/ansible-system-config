@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Color codes
+w="\e[0;37m"
+#b="\033[0;34m"
+m="\e[0;37m"
+b="\e[38;5;14m"
+r="\e[0;31m"
+g="\e[0;32m"
+
+# IP addresses
+ip_addresses=$(ip a | awk '/^[0-9]+: / { iface=$2 } /inet / { split($2, addr, "/"); print iface " " addr[1] "\t/" addr[2] }' | sort -r)
+
+echo -e "$w*$b Interfaces:"
+# Print IP addresses with an offset of 17 spaces and color formatting
+while IFS=: read -r iface addr; do
+  printf "$c\t$b%-14s$m%s\n" "$iface" "$addr"
+done <<< "$ip_addresses"
+
+echo -e
+
+
+echo -en "$w*$b Internet:"
+timeout 0.2 ping -c 1 1.1.1.1 &> /dev/null && echo -e  "$g OK" || echo -e  "$r Fail"
+echo -en "$w"
+ip r get 1.1.1.1 | head -n 1
+
+## Generate a random number between 0 and 3 inclusive
+#random_number=$((RANDOM % 4))
+
+## Print the corresponding character
+#if [[ $random_number -eq 0 ]]; then
+#  echo "/"
+#elif [[ $random_number -eq 1 ]]; then
+#  echo "|"
+#elif [[ $random_number -eq 2 ]]; then
+#  echo "-"
+#else
+#  echo "\\"
+#fi

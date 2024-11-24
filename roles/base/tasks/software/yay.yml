@@ -11,7 +11,6 @@
     repo: https://aur.archlinux.org/yay-bin.git
     dest: "/tmp/yay"
     update: true
-  when: ansible_distribution == "Archlinux"
 
 - name: Change ownership of /tmp/yay to vgscq
   ansible.builtin.file:
@@ -27,7 +26,6 @@
     chdir: "/tmp/yay"
     cmd: "makepkg -sfi --noconfirm"
     creates: /usr/bin/yay
-  when: ansible_distribution == "Archlinux"
   become: true
   become_user: vgscq
 
