@@ -32,10 +32,10 @@ function display_roles() {
 # Function to read user input and build the tags string
 function get_selected_roles() {
     local selected_indexes=()
-    read -p "Select: " -a selected_indexes
+    read -p "Select roles by their numbers (separated by space): " -a selected_indexes
 
     # Convert the selected indexes to role names
-    local tags=()
+    local tags=("base")  # Always start with "base" tag
     for index in "${selected_indexes[@]}"; do
         if [[ $index -ge 1 && $index -le ${#ROLES[@]} ]]; then
             tags+=("${ROLES[$((index - 1))]}")
@@ -44,7 +44,7 @@ function get_selected_roles() {
         fi
     done
 
-    # Join tags with commas for ansible-pull command
+    # Join tags with commas for ansible-playbook command
     echo "${tags[*]}" | tr ' ' ','
 }
 
@@ -56,40 +56,5 @@ if [ -z "$tags" ]; then
     echo "No valid roles selected. Exiting."
     exit 1
 fi
-
-# echo "Checking for Ansible and Git installations..."
-# 
-# # Update package list
-# sudo apt update
-# 
-# # Check if Ansible is installed
-# if ! command -v ansible &> /dev/null; then
-#     echo "ERROR: Ansible not found. Installing Ansible..."
-#     sudo apt install -y ansible
-#     echo "OK: Ansible has been installed."
-# else
-#     echo "OK: Ansible is already installed."
-# fi
-# 
-# # Check if Git is installed
-# if ! command -v git &>  /dev/null; then
-#     echo "ERROR: Git not found. Installing Git..."
-#     sudo apt install -y git
-#     echo "OK: git has been installed."
-# else
-#     echo "OK: Git is already installed."
-# fi
-# 
-
-#####read -r -p "Are you sure? [y/N] " response
-#####case "$response" in
-#####    [yY][eE][sS]|[yY])
-#####        echo "Running ansible-pull with tags: $tags"
-#####        echo PYTHONUNBUFFERED=true ansible-pull -U $REPO_URL --tags "$tags"
-#####        ;;
-#####    *)
-#####        echo "Exiting."
-#####        ;;
-#####esac
 
 ansible-playbook --connection=local ./local.yml --tags "$tags"

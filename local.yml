@@ -35,6 +35,8 @@
   become: true
   roles:
     - base
+  tags:
+    - base
 
 - name: Configure workstation
   hosts: workstation
