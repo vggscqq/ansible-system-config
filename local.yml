@@ -41,6 +41,8 @@
   become: true
   roles:
     - workstation
+  tags:
+    - workstation
 
 #  - name: set up sudo for ansible user
 #    copy:
