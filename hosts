@@ -1,3 +1,2 @@
 [workstation]
-vgscq-laptop connection_type=local
-ansible-btrfs-test connection_type=local
+localhost connection_type=local
