@@ -51,8 +51,7 @@ function get_selected_roles() {
 # Main script logic
 display_roles
 tags=$(get_selected_roles)
-echo $tags
-exit
+
 
 if [ -z "$tags" ]; then
     echo "No valid roles selected. Exiting."
