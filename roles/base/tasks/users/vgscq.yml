@@ -22,11 +22,11 @@
     state: present
     password: "{{ '1111' | password_hash('sha512') }}"
     shell: "{{ fish_path.stdout }}"
-  when: vgscq_user_exists.failed or vgscq_user_exists.rc != 0
+  when: not vgscq_user_exists.stat.exists
 
 - name: Expire password for vgscq if the user was created
   ansible.builtin.command: passwd -e vgscq
-  when: vgscq_user_exists.failed or vgscq_user_exists.rc != 0
+  when: not vgscq_user_exists.stat.exists
   changed_when: true
 
 
