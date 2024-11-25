@@ -10,12 +10,9 @@
   changed_when: false
 
 - name: Check if user vgscq exists
-  ansible.builtin.getent:
-    database: passwd
-    key: vgscq
+  ansible.builtin.stat:
+    path: "/home/vgscq"
   register: vgscq_user_exists
-  changed_when: false
-  failed_when: false  # Add this line to prevent the task from failing
 
 - name: Create user vgscq if it does not exist
   ansible.builtin.user:
